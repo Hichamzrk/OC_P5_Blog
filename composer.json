@@ -1,7 +1,0 @@
-{
-    "name": "hicham.z/blog",
-    "require": {},
-   	"autoload": {
-    	"psr-4": {"App\\": "../"}
-    }
-}
