@@ -2,8 +2,6 @@
 	namespace App\Core;
 	
 	session_start(); 
-	
-	require '../vendor/autoload.php';
 
 	use App\Controllers;
 

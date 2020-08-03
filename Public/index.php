@@ -6,10 +6,12 @@
 	define('ROOT', dirname(__DIR__));
 
 	//On importe les namespace nécessaires
+	use App\Autoloader;
 	use App\Core\Main;
 
 	//On importe l'autoloader
-	require '../vendor/autoload.php';
+	require_once ROOT.'/Autoloader.php';
+	Autoloader::register();
 
 	//On instancie la router Main
 	$app = new Main();
@@ -18,3 +20,4 @@
 	$app->start();
 
 ?>
+

@@ -15,7 +15,7 @@
 		private const DBHOST = 'localhost';
 		private const DBUSER = 'root';
 		private const DBPASS = 'root';
-		private const DBNAME = 'Mini_chat';
+		private const DBNAME = 'Blog';
 
 		//connexion à la bdd
 		private function __construct(){

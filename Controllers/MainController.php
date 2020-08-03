@@ -5,7 +5,10 @@
 	{
 		//methode de la page d'accueil index
 		public function index()
-		{
-			echo "Hello";
+		{	
+			if ($_POST['email']) {
+				mail('dragonoffairy@gmail.com','test', $_POST['content']);
+			}
+			$this->render('main/index');
 		}
 	}
