@@ -94,7 +94,7 @@
     	}	
 
     	//Methode d'update
-    	public function update(int $id, $model)
+    	public function update(int $id, $model, $table)
 		{
 		    $champs = [];
 		    $valeurs = [];
@@ -113,7 +113,7 @@
 		    $liste_champs = implode(', ', $champs);
 
 		    // On exécute la requête
-		    return $this->requete('UPDATE '.$this->table.' SET '. $liste_champs.' WHERE p_id = ?', $valeurs);
+		    return $this->requete('UPDATE '.$this->table.' SET '. $liste_champs.' WHERE '.$table.' = ?', $valeurs);
 		}
 		
 		//Selectionne tous à partir d'un element

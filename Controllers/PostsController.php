@@ -22,24 +22,19 @@
 
 			$comment = new CommentManager;
 			$comments = $comment->findBy([
-				'p_id' => $id[0]
+				'p_id' => $id[0],
+				'c_validation' => 1
 			]);
 
-			if (isset($_POST['content']) AND !empty($_POST['content'])) {
+			if (isset($_POST['c_content']) AND !empty($_POST['c_content'])) {
 				$comment = new Comment;
-				$comment->hydrate([
-					'c_pseudo' => $_POST['pseudo'],
-					'c_content' => $_POST['content'],
-					'p_id' => $_POST['id'] 
-				]);
+
+				$comment->hydrate($_POST);
 				
 				$commentManager = new CommentManager;
-				$commentManager->create([
-					'c_pseudo' => $_POST['pseudo'],
-					'c_content'=> $_POST['content'],
-					'p_id' => $_POST['id'] 
-				]);
-				header("Refresh:0");
+				$commentManager->createComment($comment);
+				
+				//header("Refresh:0");
 			}
 
 			$this->render('post/index', compact('post','comments'));

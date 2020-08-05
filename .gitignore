@@ -1,3 +1,4 @@
 /vendor/
 composer.phar
 composer.json
+.DS_Store

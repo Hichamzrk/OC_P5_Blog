@@ -4,6 +4,7 @@
 	class Post
 	{
 		protected $p_id;
+		protected $u_id;
 		protected $p_author;
 		protected $p_title;
 		protected $p_chapo;
@@ -34,6 +35,18 @@
 	    public function setP_id(int $p_id):self
 	    {
 	        $this->p_id = $p_id;
+
+	        return $this;
+	    }
+
+	    public function getU_id():int
+	    {
+	        return $this->u_id;
+	    }
+
+	    public function setU_id(int $u_id):self
+	    {
+	        $this->u_id = $u_id;
 
 	        return $this;
 	    }

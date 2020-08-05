@@ -8,4 +8,20 @@
 	    {
 	        $this->table = 'b_comment';
 	    }
+
+	    public function updateComment($id, Comment $comment){
+	    	$comments = ([
+					'c_validation'=> $comment->getC_validation(),
+				]);
+	    	$this->update($id,$comments, 'c_id');
+	    }
+
+	    public function createComment(Comment $comment){
+	    	$comments = ([
+					'c_pseudo' => $comment->getC_pseudo(),
+					'p_id' => $comment->getP_id(),
+					'c_content' => $comment->getC_content(),
+				]);
+	    	$this->create($comments);
+	    }
 	}

@@ -54,7 +54,7 @@
 	        return $this->c_pseudo;
 	    }
 	    
-	    public function setC_author(string $c_pseudo):self
+	    public function setC_pseudo(string $c_pseudo):self
 	    {
 	        $this->c_pseudo = $c_pseudo;
 

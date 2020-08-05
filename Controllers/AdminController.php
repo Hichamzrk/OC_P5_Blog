@@ -3,6 +3,7 @@
 	
 	Use App\Models\PostManager;
 	Use App\Models\CommentManager;
+	Use App\Models\Comment;
 	Use App\Models\Post;
 
 	class AdminController extends Controller
@@ -17,36 +18,30 @@
 			$post = new PostManager;
 			$posts = $post->findAll();
 
-			$this->render('admin/index', compact('posts'));
+			$comment = new CommentManager;
+			$comments = $comment->findBy(['c_validation' => 0]);
+
+			$this->render('admin/index', compact('posts', 'comments'));
 		}
 
 		public function delete($id){
 			$post = new PostManager;
 			$post->delete($id[0]);
+			
 			header("location:/admin");
 		}
 
 		public function create(){
 
 			if ($_POST) {
+				$_POST += ['u_id' => 1];
+				
 				$post = new Post;
-				$post->hydrate([
-					'u_id'=> 5,
-					'p_author' => $_POST['author'],
-					'p_title' => $_POST['title'],
-					'p_chapo' => $_POST['chapo'],
-					'p_content' => $_POST['content'],
-				]);
+				$post->hydrate($_POST);
 
 				$postManager = new PostManager;
-				$postManager->create([
-					'u_id'=> 5,
-					'p_author' => $_POST['author'],
-					'p_title' => $_POST['title'],
-					'p_chapo' => $_POST['chapo'],
-					'p_content' => $_POST['content'],
-				]);
-
+				$postManager->createPost($post);
+				
 				header('location: /admin');
 			}
 			$this->render('createPost/index');
@@ -57,27 +52,27 @@
 			$posts = $postManager->find($id[0], 'p_id');
 
 			if ($_POST) {
+				$_POST += ['u_id' => 1];
+				
 				$post = new Post;
-				$posts = $post->hydrate([
-					'u_id'=> 5,
-					'p_author' => $_POST['author'],
-					'p_title' => $_POST['title'],
-					'p_chapo' => $_POST['chapo'],
-					'p_content' => $_POST['content'],
-				]);
+				$post->hydrate($_POST);
 
 				$postManager = new PostManager;
-				$postManager->update($id[0], [
-					'u_id'=> 5,
-					'p_author' => $_POST['author'],
-					'p_title' => $_POST['title'],
-					'p_chapo' => $_POST['chapo'],
-					'p_content' => $_POST['content'],
-				]);
+				$postManager->updatePost($id[0], $post);
 
 				header('location: /admin');
 			}
 
 			$this->render('updatePost/index', compact('posts'));
+		}
+
+		public function updateComment($id){
+			$comment = new Comment;
+			$comments = $comment->hydrate(['c_validation' => 1]);
+
+			$commentManager = new CommentManager;
+			$commentManager->updateComment($id[0], $comment);
+
+			header('location: /admin');
 		}
 	}

@@ -1,6 +1,14 @@
-<h1>Accueil</h1>
+<p>accueil</p>
+
 <form method="POST">
-	<input type="text" name="email" placeholder="email">
-	<input type="textarea" name="content" placeholder="text">
-	<a href="mailto:dragonoffairy@gmail.com">submit</a>
+	<input type="text" name="firstname" placeholder="Nom">
+	<input type="text" name="lastname" placeholder="Prenom">
+	<input type="email" name="email" placeholder="email">
+	<textarea name="content" placeholder="contenue"></textarea>
+	<input type="submit" name="">
 </form>
+
+<a href="">CV</a>
+<a href="">github</a>
+<a href="">linkedin</a>
+<a href="">twitter</a>
