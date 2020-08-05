@@ -11,7 +11,7 @@
 		//methode de la page d'accueil index
 		public function index()
 		{
-			if (!$_SESSION['email']) {
+			if (!$_SESSION['user']) {
 				header('location: /user/login');
 				exit;
 			}
@@ -25,21 +25,29 @@
 		}
 
 		public function delete($id){
+			$id = strip_tags($id[0]);
+
 			$post = new PostManager;
-			$post->delete($id[0]);
+			$post->delete($id);
 			
 			header("location:/admin");
 		}
 
 		public function create(){
+			if (!$_SESSION['user']) {
+				header('location: /user/login');
+				exit;
+			}
 
-			if ($_POST) {
-				$_POST += ['u_id' => 1];
-				
+			if (!empty($_POST) AND !in_array('', $_POST)) {
 				$post = new Post;
-				$post->hydrate($_POST);
-
 				$postManager = new PostManager;
+
+				$filter = $postManager->filter();
+				$donnee = filter_input_array(INPUT_POST, $filter);
+
+				$post->hydrate($donnee);
+
 				$postManager->createPost($post);
 				
 				header('location: /admin');
@@ -48,17 +56,23 @@
 		}
 
 		public function update($id){
+			if (!$_SESSION['user']) {
+			header('location: /user/login');
+			exit;
+			}
+
+			$id = strip_tags($id[0]);
 			$postManager = new PostManager;
-			$posts = $postManager->find($id[0], 'p_id');
+			$posts = $postManager->find($id, 'p_id');
 
-			if ($_POST) {
-				$_POST += ['u_id' => 1];
-				
+			if (!empty($_POST) AND !in_array('', $_POST)) {
+				$filter = $postManager->filter();
+				$donnee = filter_input_array(INPUT_POST, $filter);
+
 				$post = new Post;
-				$post->hydrate($_POST);
+				$post->hydrate($donnee);
 
-				$postManager = new PostManager;
-				$postManager->updatePost($id[0], $post);
+				$postManager->updatePost($id, $post);
 
 				header('location: /admin');
 			}
@@ -67,11 +81,18 @@
 		}
 
 		public function updateComment($id){
+			if (!$_SESSION['user']) {
+			header('location: /user/login');
+			exit;
+			}
+
+			$id = strip_tags($id[0]);
+
 			$comment = new Comment;
 			$comments = $comment->hydrate(['c_validation' => 1]);
 
 			$commentManager = new CommentManager;
-			$commentManager->updateComment($id[0], $comment);
+			$commentManager->updateComment($id, $comment);
 
 			header('location: /admin');
 		}
