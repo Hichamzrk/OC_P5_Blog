@@ -6,9 +6,9 @@
 <p>Commentaire : </p>
 
 <form method="POST">
-	<input type="text" name="pseudo" placeholder="pseudo">
-	<input type="text" name="content" placeholder="commentaire">
-	<input type="hidden" name="id" value="<?=$post->p_id?>">
+	<input type="text" name="c_pseudo" placeholder="pseudo">
+	<input type="text" name="c_content" placeholder="commentaire">
+	<input type="hidden" name="p_id" value="<?=$post->p_id?>">
 	<input type="submit" name="">
 </form>
 

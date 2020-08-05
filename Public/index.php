@@ -1,4 +1,5 @@
 <?php
+
 	error_reporting(E_ALL);
 	ini_set("display_errors", 1);
 
@@ -10,8 +11,7 @@
 	use App\Core\Main;
 
 	//On importe l'autoloader
-	require_once ROOT.'/Autoloader.php';
-	Autoloader::register();
+	require ROOT . '/vendor/autoload.php';
 
 	//On instancie la router Main
 	$app = new Main();

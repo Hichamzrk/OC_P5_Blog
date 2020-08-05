@@ -44,51 +44,7 @@ use App\Models\User;
 			
 		}
 
-		//mehtode la page inscription
-		public function register(){
-			
-			//On affiche la view
-			$this->render('register/index');
-			
-			//On vérifie si les champs on bien été remplie
-			if (isset($_POST['pseudo']) AND !empty($_POST['pseudo'])) {
-				
-				$pseudo = strip_tags($_POST['pseudo']);
-				$password = $_POST['password'];
-
-				//On instancie la classe UserModel
-				$UserManager = new UserManager;
-				$User = new User;
-
-				//On vérifie si le pseudo éxiste déja ou non 
-				$UserArray = $UserManager->findOneByPseudo($pseudo);
-
-				//Si le pseudo n'a pas été utilisé on le filtre 
-				if(!$UserArray){
-				    
-				    //On hydrate les données dans la classe UserModel
-				    $donnes = [
-				    	'pseudo'=>$pseudo,
-				    	'password'=>password_hash($password, PASSWORD_DEFAULT)
-				    ];
-				    $User->hydrate($donnes);
-				  
-				    //On créer le user dans la bdd
-				    $UserManager->create($donnes);
-				    
-				    //On créer la session 
-				    $_SESSION['pseudo'] = $pseudo;
-				    
-				    //On redirectionne sur la page message
-				    //header('Location: /message');
-					//exit;
-				}
-				
-				//Sinon on redirection sur la page register
-				//header('Location: /user/register');
-			}
-		}
-
+		
 		//methode de logout
 		public function logout(){
 			unset($_SESSION['email']);
