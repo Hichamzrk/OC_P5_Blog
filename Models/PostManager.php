@@ -30,4 +30,9 @@
 				]);
 	    	$this->update($id,$posts, 'p_id');
 	    }
+
+	    public function findLast(){
+	    	$query = $this->requete('SELECT * FROM '.$this->table.' ORDER BY p_id DESC LIMIT 1');
+			return $query->fetch();
+	    }
 	}

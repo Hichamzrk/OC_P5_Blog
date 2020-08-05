@@ -1,7 +1,8 @@
-<?php 
-namespace App\Controllers;
-use App\Models\UserManager;
-use App\Models\User;
+<?php
+	namespace App\Controllers;
+	
+	use App\Models\UserManager;
+	use App\Models\User;
 
 	class UserController extends Controller
 	{
