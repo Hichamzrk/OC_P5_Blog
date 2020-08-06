@@ -11,8 +11,8 @@
 			$postManager = new PostManager;
 			$post = $postManager->findLast();
 
-			if (isset($_POST['email'])) {
-				mail('dragonoffairy@gmail.com','test', $_POST['content']);
+			if (!empty($_POST) AND !in_array('',$_POST)) {
+				mail('dragonoffairy@gmail.com','test', strip_tags($_POST['content']));
 			}
 			$this->render('main/index', compact('post'));
 		}

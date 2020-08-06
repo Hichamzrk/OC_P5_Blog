@@ -15,6 +15,7 @@
 	<input type="text" name="c_pseudo" placeholder="pseudo">
 	<input type="text" name="c_content" placeholder="commentaire">
 	<input type="hidden" name="p_id" value="<?=$post->p_id?>">
+	<input type="hidden" name="token" value="<?=App\Models\TokenManager::genToken()?>">
 	<input type="submit" name="">
 </form>
 <article>
