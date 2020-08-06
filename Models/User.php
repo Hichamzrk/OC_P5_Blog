@@ -18,11 +18,7 @@
 					//On appelle le setter.
 					$this->$method($value);
 				}
-				echo '<pre>';
-		        var_dump($this);
-		        echo '</pre>';
 			}
-			return $this;
 		}
 
 		public function getU_id():int
@@ -42,7 +38,7 @@
 	        return $this->u_email;
 	    }
 	    
-	    public function setU_mail(string $u_email):self
+	    public function setU_email(string $u_email):self
 	    {
 	        $this->u_email = $u_email;
 

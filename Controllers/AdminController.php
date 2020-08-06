@@ -3,6 +3,7 @@
 	
 	Use App\Models\PostManager;
 	Use App\Models\CommentManager;
+	Use App\Models\TokenManager;
 	Use App\Models\Comment;
 	Use App\Models\Post;
 
@@ -11,8 +12,8 @@
 		//methode de la page d'accueil index
 		public function index()
 		{
-			if (!$_SESSION['email']) {
-				header('location: /user/login');
+			if (!$_SESSION['user']) {
+				header('location: /user/index');
 				exit;
 			}
 			$post = new PostManager;
@@ -24,22 +25,37 @@
 			$this->render('admin/index', compact('posts', 'comments'));
 		}
 
-		public function delete($id){
-			$post = new PostManager;
-			$post->delete($id[0]);
+		public function delete($proprety){
+			TokenManager::checkToken($proprety[1]);
+			
+			if (!$_SESSION['user']) {
+				header('location: /user/index');
+				exit;
+			}
+			 $id = strip_tags($proprety[0]);
+
+			 $post = new PostManager;
+			 $post->delete($id);
 			
 			header("location:/admin");
 		}
 
 		public function create(){
+			if (!$_SESSION['user']) {
+				header('location: /user/index');
+				exit;
+			}
 
-			if ($_POST) {
-				$_POST += ['u_id' => 1];
-				
+			if (!empty($_POST) AND !in_array('', $_POST)) {
+				TokenManager::checkToken($_POST['token']);
 				$post = new Post;
-				$post->hydrate($_POST);
-
 				$postManager = new PostManager;
+
+				$filter = $postManager->filter();
+				$donnee = filter_input_array(INPUT_POST, $filter);
+
+				$post->hydrate($donnee);
+
 				$postManager->createPost($post);
 				
 				header('location: /admin');
@@ -47,18 +63,29 @@
 			$this->render('createPost/index');
 		}
 
-		public function update($id){
+		public function update($proprety){
 			$postManager = new PostManager;
-			$posts = $postManager->find($id[0], 'p_id');
+			$verifyExist = $postManager->findBy(['p_id' => $proprety[0]]);
+			
+			if (!$_SESSION['user'] OR empty($verifyExist)) {
+			header('location: /user/index');
+			exit;
+			}
 
-			if ($_POST) {
-				$_POST += ['u_id' => 1];
-				
+			$id = strip_tags($proprety[0]);
+
+			$posts = $postManager->find($id, 'p_id');
+
+			if (!empty($_POST) AND !in_array('', $_POST)) {
+				TokenManager::checkToken($_POST['token']);
+
+				$filter = $postManager->filter();
+				$donnee = filter_input_array(INPUT_POST, $filter);
+
 				$post = new Post;
-				$post->hydrate($_POST);
+				$post->hydrate($donnee);
 
-				$postManager = new PostManager;
-				$postManager->updatePost($id[0], $post);
+				$postManager->updatePost($id, $post);
 
 				header('location: /admin');
 			}
@@ -66,12 +93,21 @@
 			$this->render('updatePost/index', compact('posts'));
 		}
 
-		public function updateComment($id){
+		public function updateComment($proprety){
+			TokenManager::checkToken($proprety[1]);
+			
+			if (!$_SESSION['user']) {
+			header('location: /user/index');
+			exit;
+			}
+
+			$id = strip_tags($proprety[0]);
+
 			$comment = new Comment;
 			$comments = $comment->hydrate(['c_validation' => 1]);
 
 			$commentManager = new CommentManager;
-			$commentManager->updateComment($id[0], $comment);
+			$commentManager->updateComment($id, $comment);
 
 			header('location: /admin');
 		}
