@@ -7,7 +7,7 @@
 	class UserController extends Controller
 	{
 		//methode de la page login
-		public function login(){
+		public function index(){
 			if (isset($_SESSION['user'])) {
 				header('location: /admin');
 			}

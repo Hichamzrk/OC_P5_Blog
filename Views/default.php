@@ -11,7 +11,7 @@
 		<a href="/main">Accueil</a>
 		<h1>Logo</h1>
 		<a href="/posts">Articles</a>
-		<form action="/user/login">
+		<form action="/user/index">
 			<button>Connexion</button>
 		</form>
 	</header>

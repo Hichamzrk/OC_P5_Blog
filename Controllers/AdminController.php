@@ -13,7 +13,7 @@
 		public function index()
 		{
 			if (!$_SESSION['user']) {
-				header('location: /user/login');
+				header('location: /user/index');
 				exit;
 			}
 			$post = new PostManager;
@@ -29,7 +29,7 @@
 			TokenManager::checkToken($proprety[1]);
 			
 			if (!$_SESSION['user']) {
-				header('location: /user/login');
+				header('location: /user/index');
 				exit;
 			}
 			 $id = strip_tags($proprety[0]);
@@ -42,7 +42,7 @@
 
 		public function create(){
 			if (!$_SESSION['user']) {
-				header('location: /user/login');
+				header('location: /user/index');
 				exit;
 			}
 
@@ -64,13 +64,16 @@
 		}
 
 		public function update($proprety){
-			if (!$_SESSION['user']) {
-			header('location: /user/login');
+			$postManager = new PostManager;
+			$verifyExist = $postManager->findBy(['p_id' => $proprety[0]]);
+			
+			if (!$_SESSION['user'] OR empty($verifyExist)) {
+			header('location: /user/index');
 			exit;
 			}
 
 			$id = strip_tags($proprety[0]);
-			$postManager = new PostManager;
+
 			$posts = $postManager->find($id, 'p_id');
 
 			if (!empty($_POST) AND !in_array('', $_POST)) {
@@ -94,7 +97,7 @@
 			TokenManager::checkToken($proprety[1]);
 			
 			if (!$_SESSION['user']) {
-			header('location: /user/login');
+			header('location: /user/index');
 			exit;
 			}
 
