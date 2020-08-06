@@ -3,6 +3,7 @@
 	
 	Use App\Models\PostManager;
 	Use App\Models\CommentManager;
+	Use App\Models\TokenManager;
 	Use App\Models\Comment;
 	Use App\Models\Post;
 
@@ -24,11 +25,17 @@
 			$this->render('admin/index', compact('posts', 'comments'));
 		}
 
-		public function delete($id){
-			$id = strip_tags($id[0]);
+		public function delete($proprety){
+			TokenManager::checkToken($proprety[1]);
+			
+			if (!$_SESSION['user']) {
+				header('location: /user/login');
+				exit;
+			}
+			 $id = strip_tags($proprety[0]);
 
-			$post = new PostManager;
-			$post->delete($id);
+			 $post = new PostManager;
+			 $post->delete($id);
 			
 			header("location:/admin");
 		}
@@ -40,6 +47,7 @@
 			}
 
 			if (!empty($_POST) AND !in_array('', $_POST)) {
+				TokenManager::checkToken($_POST['token']);
 				$post = new Post;
 				$postManager = new PostManager;
 
@@ -55,17 +63,19 @@
 			$this->render('createPost/index');
 		}
 
-		public function update($id){
+		public function update($proprety){
 			if (!$_SESSION['user']) {
 			header('location: /user/login');
 			exit;
 			}
 
-			$id = strip_tags($id[0]);
+			$id = strip_tags($proprety[0]);
 			$postManager = new PostManager;
 			$posts = $postManager->find($id, 'p_id');
 
 			if (!empty($_POST) AND !in_array('', $_POST)) {
+				TokenManager::checkToken($_POST['token']);
+
 				$filter = $postManager->filter();
 				$donnee = filter_input_array(INPUT_POST, $filter);
 
@@ -80,13 +90,15 @@
 			$this->render('updatePost/index', compact('posts'));
 		}
 
-		public function updateComment($id){
+		public function updateComment($proprety){
+			TokenManager::checkToken($proprety[1]);
+			
 			if (!$_SESSION['user']) {
 			header('location: /user/login');
 			exit;
 			}
 
-			$id = strip_tags($id[0]);
+			$id = strip_tags($proprety[0]);
 
 			$comment = new Comment;
 			$comments = $comment->hydrate(['c_validation' => 1]);

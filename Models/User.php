@@ -19,7 +19,6 @@
 					$this->$method($value);
 				}
 			}
-			return $this;
 		}
 
 		public function getU_id():int
