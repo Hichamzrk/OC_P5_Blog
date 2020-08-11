@@ -1,7 +1,7 @@
 ![Screenshot](Branding.png)
 ## Presentation du projet
 - Blog en php orienté objet.
-- Utilisation du design pattern MVC.
+- Utilisation du modele MVC.
 - Page d'accueil.
 - Articles.
 - Espace d'administration.
@@ -24,6 +24,7 @@ Les étapes pour installer votre programme :
 
 - Démarrer votre serveur local.
 - Upload du fichier sql qui est à la racine du projet sur votre interface de géstion de base de donnée fournie avec votre serveur local (phpmyadmin...).
+- Changement des informations de connexion à la base de donnée : /Core/Db/Db.php -> ligne 15. 
 - installer l'autoloader de composer.
 
 ### Démarrage
