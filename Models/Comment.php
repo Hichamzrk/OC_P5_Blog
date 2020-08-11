@@ -24,72 +24,97 @@
 			}
 			return $this;
 		}
-		
+		/**
+		 * @return [type]
+		 */
 		public function getC_id():int
 	    {
 	        return $this->c_id;
 	    }
-
+	    
+	    /**
+	     * @param int
+	     */
 	    public function setC_id(int $c_id):self
 	    {
 	        $this->c_id = $c_id;
 
 	        return $this;
 	    }
-
+	    /**
+	     * @return [type]
+	     */
 	    public function getP_id():int
 	    {
 	        return $this->p_id;
 	    }
-
+	    /**
+	     * @param int
+	     */
 	    public function setP_id(int $p_id):self
 	    {
 	        $this->p_id = $p_id;
 
 	        return $this;
 	    }
-
+	    /**
+	     * @return [type]
+	     */
 	    public function getC_pseudo():string
 	    {
 	        return $this->c_pseudo;
 	    }
-	    
+	    /**
+	     * @param string
+	     */
 	    public function setC_pseudo(string $c_pseudo):self
 	    {
 	        $this->c_pseudo = $c_pseudo;
 
 	        return $this;
 	    }
-	    
+	    /**
+	     * @return [type]
+	     */
 	    public function getC_added_datetime():string
 	    {
 	        return $this->c_added_datetime;
 	    }
-
+	    /**
+	     * @param string
+	     */
 	    public function setC_added_datetime(string $c_added_datetime):self
 	    {
 	        $this->c_added_datetime = $c_added_datetime;
 
 	        return $this;
 	    }
-
+	    /**
+	     * @return [type]
+	     */
 	    public function getC_validation():int
 	    {
 	        return $this->c_validation;
 	    }
-
+	    /**
+	     * @param int
+	     */
 	    public function setC_validation(int $c_validation):self
 	    {
 	        $this->c_validation = $c_validation;
 
 	        return $this;
 	    }
-
+	    /**
+	     * @return [type]
+	     */
 	    public function getC_content():string
 	    {
 	        return $this->c_content;
 	    }
-
+	    /**
+	     * @param string
+	     */
 	    public function setC_content(string $c_content):self
 	    {
 	        $this->c_content = $c_content;

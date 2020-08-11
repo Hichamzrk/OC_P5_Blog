@@ -4,17 +4,20 @@
 	class TokenManager{
 
 		public static function genToken(){
-			$token = bin2hex(random_bytes(32));
-			$_SESSION['token'] = $token;
-
-			return $_SESSION['token'];
+			if (empty($_SESSION['token'])) {
+    			$_SESSION['token'] = bin2hex(random_bytes(32));
+			}
+			$token = $_SESSION['token'];
+			return $token;
 		}
 
 		public static function checkToken($proprety){
 			if ($_SESSION['token'] != $proprety) {
 				http_response_code(404);
-			    echo "La page recherchée n'existe pas";
+			    echo "La page recherché n'éxiste pas";
+			    unset($_SESSION['token']);
 			    die();
 			}
+			unset($_SESSION['token']);
 		}
 	}

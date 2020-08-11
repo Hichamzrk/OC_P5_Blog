@@ -7,7 +7,9 @@
 
 	class PostsController extends Controller
 	{
-		//methode de la page d'accueil index
+		/**
+		 * Affiche les articles
+		 */
 		public function index()
 		{
 			$post = new PostManager;
@@ -16,8 +18,12 @@
 			$this->render('posts/index', compact('posts'));
 		}
 
-		public function post($id){
-			$id = strip_tags($id[0]);
+		/**
+		 * Affiche un article
+		 * @param  [Paramètre]
+		 */
+		public function post($parameter){
+			$id = strip_tags($parameter[0]);
 			
 			$posts = new PostManager;
 			$post = $posts->find($id, 'p_id');
@@ -28,6 +34,7 @@
 				'c_validation' => 1
 			]);
 
+			//Créer un commentaire
 			if (!empty($_POST) AND !in_array('',$_POST)) {
 				$comment = new Comment;
 

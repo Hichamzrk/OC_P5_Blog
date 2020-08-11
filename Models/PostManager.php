@@ -36,12 +36,14 @@
 			return $query->fetch();
 	    }
 
+	    
 	    public function filter(){
 	   		$filter = array(
-	   			'p_author' => FILTER_SANITIZE_STRING,
+	   			'p_author' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+
 	   			'p_chapo' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
 	   			'p_title' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-	   			'p_content' => FILTER_SANITIZE_FULL_SPECIAL_CHARS
+	   			'p_content' => FILTER_DEFAULT,
 	   		);
 
 	   		return $filter; 

@@ -88,9 +88,9 @@
 		}
 
 		//Methode de suppression d'une donnée
-		public function delete(string $id)
+		public function delete(string $id, $column)
    		{
-       		return $this->requete("DELETE FROM {$this->table} WHERE p_id = ?", [$id]);
+       		return $this->requete("DELETE FROM {$this->table} WHERE $column = ?", [$id]);
     	}	
 
     	//Methode d'update

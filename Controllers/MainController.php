@@ -5,12 +5,15 @@
 
 	class MainController extends Controller
 	{
-		//methode de la page d'accueil index
+		/**
+		 * Page d'accueil
+		 */
 		public function index()
 		{	
 			$postManager = new PostManager;
 			$post = $postManager->findLast();
 
+			//Systeme de mail
 			if (!empty($_POST) AND !in_array('',$_POST)) {
 				mail('dragonoffairy@gmail.com','test', strip_tags($_POST['content']));
 			}

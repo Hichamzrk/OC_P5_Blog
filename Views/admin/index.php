@@ -1,17 +1,37 @@
-<a href="/admin/create">New post</a>
-<a href="/user/logout">Logout</a>
+<div class="admin-header">
+	<h1>Administration</h1>
+	<h2>Articles</h2>
+</div>
+<div class="admin-menu">
+	<img src="/picture/icons/menu.png">
+</div>
+<div class="admin-button">
+	<div class="create">
+		<a href="/admin/create">New post</a>
+	</div>
+	<div class="commentaire">
+		<a href="/admin/comment">Commentaires</a>
+	</div>
+	<div class="logout">
+		<a href="/user/logout">Logout</a>
+	</div>
+</div>
 
-<article>
+<article class="admin-posts">
 	<?php foreach ($posts as $post):?>
-		<p><?=$post->p_title?></p>
-		<a href="/admin/delete/<?=$post->p_id?>/<?=App\Models\TokenManager::genToken()?>">delete</a>
-		<a href="/admin/update/<?=$post->p_id?>">update</a>
+		<div class="admin-post">
+			<div class="text">
+				<h2><?=$post->p_title?></h3>
+			</div>
+			<div class="update">
+				<a href="/admin/update/<?=$post->p_id?>">Update</a>
+			</div>
+			
+			<div class="delete">
+				<a href="/admin/delete/<?=$post->p_id?>/<?=App\Models\TokenManager::genToken()?>">Delete</a>
+			</div>
+		</div>
 	<?php endforeach ?>
 </article>
 
-<article>
-	<?php foreach ($comments as $comment):?>
-		<p><?=$comment->c_pseudo?></p>
-		<a href="/admin/updateComment/<?=$comment->c_id?>/<?=App\Models\TokenManager::genToken()?>">valider</a>
-	<?php endforeach ?>
-</article>
+

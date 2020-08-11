@@ -8,6 +8,9 @@
 	    {
 	        $this->table = 'b_user';
 	    }
+	    /**
+	     * @param User
+	     */
 	    public function setSession(User $user){
 	   		$_SESSION['user'] = [
 		        'id' => $user->getU_id(),

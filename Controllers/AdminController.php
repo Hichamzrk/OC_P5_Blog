@@ -9,7 +9,10 @@
 
 	class AdminController extends Controller
 	{
-		//methode de la page d'accueil index
+		
+		/**
+		 * Affiches les articles
+		 */
 		public function index()
 		{
 			if (!$_SESSION['user']) {
@@ -19,12 +22,13 @@
 			$post = new PostManager;
 			$posts = $post->findAll();
 
-			$comment = new CommentManager;
-			$comments = $comment->findBy(['c_validation' => 0]);
-
-			$this->render('admin/index', compact('posts', 'comments'));
+			$this->render('admin/index', compact('posts'));
 		}
-
+		
+		/**
+		 * Supprime un article
+		 * @param  [paramètre]
+		 */
 		public function delete($proprety){
 			TokenManager::checkToken($proprety[1]);
 			
@@ -32,14 +36,17 @@
 				header('location: /user/index');
 				exit;
 			}
-			 $id = strip_tags($proprety[0]);
+			$id = strip_tags($proprety[0]);
 
-			 $post = new PostManager;
-			 $post->delete($id);
+			$post = new PostManager;
+			$post->delete($id, 'p_id');
 			
 			header("location:/admin");
 		}
-
+		
+		/**
+		 * Créer un article
+		 */
 		public function create(){
 			if (!$_SESSION['user']) {
 				header('location: /user/index');
@@ -47,7 +54,9 @@
 			}
 
 			if (!empty($_POST) AND !in_array('', $_POST)) {
+				
 				TokenManager::checkToken($_POST['token']);
+				
 				$post = new Post;
 				$postManager = new PostManager;
 
@@ -63,7 +72,12 @@
 			$this->render('createPost/index');
 		}
 
+		/**
+		 * Modifie un article
+		 * @param  [paramètre]
+		 */
 		public function update($proprety){
+			
 			$postManager = new PostManager;
 			$verifyExist = $postManager->findBy(['p_id' => $proprety[0]]);
 			
@@ -93,12 +107,17 @@
 			$this->render('updatePost/index', compact('posts'));
 		}
 
+		/**
+		 * Valide un commentaire
+		 * @param  [paramètre]
+		 */
 		public function updateComment($proprety){
+			
 			TokenManager::checkToken($proprety[1]);
 			
 			if (!$_SESSION['user']) {
-			header('location: /user/index');
-			exit;
+				header('location: /user/index');
+				exit;
 			}
 
 			$id = strip_tags($proprety[0]);
@@ -109,6 +128,36 @@
 			$commentManager = new CommentManager;
 			$commentManager->updateComment($id, $comment);
 
-			header('location: /admin');
+			header('location: /admin/comment');
+		}
+
+		/**
+		 * Valide un commentaire
+		 */
+		public function comment(){
+			if (!$_SESSION['user']) {
+				header('location: /user/index');
+				exit;
+			}
+
+			$comment = new CommentManager;
+			$comments = $comment->findBy(['c_validation' => 0]);
+
+			$this->render('comments/index', compact('comments'));
+		}
+
+		public function deleteComment($proprety){
+			TokenManager::checkToken($proprety[1]);
+			
+			if (!$_SESSION['user']) {
+				header('location: /user/index');
+				exit;
+			}
+			$id = strip_tags($proprety[0]);
+
+			$comment = new CommentManager;
+			$comment->delete($id, 'c_id');
+			
+			header("location:/admin/comment");
 		}
 	}

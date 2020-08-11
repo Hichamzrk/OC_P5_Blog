@@ -6,7 +6,9 @@
 
 	class UserController extends Controller
 	{
-		//methode de la page login
+		/**
+		 * Login
+		 */
 		public function index(){
 			if (isset($_SESSION['user'])) {
 				header('location: /admin');
@@ -50,7 +52,9 @@
 		}
 
 		
-		//methode de logout
+		/**
+		 * Logout
+		 */
 		public function logout(){
 			unset($_SESSION['user']);
 		    header('Location: '. $_SERVER['HTTP_REFERER']);

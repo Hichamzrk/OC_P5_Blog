@@ -1,8 +1,12 @@
 <!-- login view -->
-<h1>Login</h1>
-<form method="POST">
-	<img src="" alt="image">
-	<input type="text" name="email" placeholder="email">
-	<input type="text" name="password" placeholder="password">
-	<input type="submit" name="">
-</form>
+<article class="login-form">
+	<div>
+		<h2>Connexion</h2>
+		<img src="/picture/logo.png">
+	</div>
+	<form method="POST">
+		<input type="text" name="email" placeholder="E-mail" required="">
+		<input type="password" name="password" placeholder="Mot de passe" required>
+		<button>Valider</button>
+	</form>
+</article>
