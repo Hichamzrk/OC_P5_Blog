@@ -17,7 +17,7 @@
 			<a href="/posts">Articles</a>
 			<a href="/user/index" class="login">Connexion</a>
 			<div class="contact">
-				<a href="main/#contact">Contact</a>
+				<a href="/main/#contact">Contact</a>
 			</div>
 		</div>
 	</header>
