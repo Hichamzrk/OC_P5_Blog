@@ -1,7 +1,9 @@
 <article class="post">
 	<h1><?= $post->p_title ?></h1>
 	<h2><?= $post->p_chapo ?></h2>
-	<p><?= $post->p_content ?></p>
+	<div class="post-content">
+		<p><?= $post->p_content ?></p>
+	</div>
 	<div class="post-author">
 		<p><?= $post->p_author ?></p>
 		<p><?= $post->p_added_datetime ?></p>
@@ -11,7 +13,7 @@
 <form method="POST" class="post-form">
 	<h2>Commentaires : </h2>
 	<input type="text" name="c_pseudo" placeholder="Pseudo" required>
-	<textarea type="text" name="c_content" placeholder="Commentaire..." required></textarea>
+	<textarea type="text" name="c_content" placeholder="Commentaire soumis à validation..." required></textarea>
 	<input type="hidden" name="p_id" value="<?=$post->p_id?>">
 	<input type="hidden" name="token" value="<?=App\Models\TokenManager::genToken()?>">
 	<button> Valider </button>

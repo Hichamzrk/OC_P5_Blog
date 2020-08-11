@@ -299,7 +299,7 @@ footer p{
 	margin-top: 5%;
 }
 
-.post p{
+.post-content{
 	margin-right: 15%;
 	margin-left: 15%;
 }
@@ -351,7 +351,8 @@ footer p{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 1px solid #E6ECF8; 
+	border-bottom: 1px solid;
+	border-color: black; 
 }
 
 .post-form button{
@@ -740,6 +741,11 @@ footer p{
 	}
 
 	/* create post */
+	.post-content{
+		margin-right: 5%;
+		margin-left: 5%;
+	}
+
 	.post-new input{
 		width: 50%;
 	}
