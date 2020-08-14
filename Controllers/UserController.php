@@ -33,7 +33,7 @@
 				//On vérifie si l'utilisateur éxiste
 				if(!$userFind){
 				    http_response_code(404);
-				    echo "pas ok";
+				    echo "<script>alert('Identifiant erroné');</script>";
 					exit;
 				}
 				

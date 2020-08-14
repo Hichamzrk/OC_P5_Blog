@@ -28,7 +28,7 @@
 				<a href="/admin/updateComment/<?=$comment->c_id?>/<?=App\Models\TokenManager::genToken()?>">valider</a>
 			</div>
 			<div class="delete">
-				<a href="/admin/deleteComment/<?=$comment->c_id?>/<?=App\Models\TokenManager::genToken()?>">delete</a>
+				<a href="/admin/deleteComment/<?=$comment->c_id?>/<?=App\Models\TokenManager::genToken()?>" onclick="return confirm('Tu es sur ?')">delete</a>
 			</div>
 		</div>
 	<?php endforeach ?>

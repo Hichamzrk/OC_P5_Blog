@@ -28,7 +28,7 @@
 			</div>
 			
 			<div class="delete">
-				<a href="/admin/delete/<?=$post->p_id?>/<?=App\Models\TokenManager::genToken()?>">Delete</a>
+					<a href="/admin/delete/<?=$post->p_id?>/<?=App\Models\TokenManager::genToken()?>" onclick="return confirm('Tu es sur ?')">Delete</a>
 			</div>
 		</div>
 	<?php endforeach ?>

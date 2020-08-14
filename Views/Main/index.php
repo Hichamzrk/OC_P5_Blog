@@ -7,7 +7,7 @@
 			<a href="main/#contact" class="contact">Contact</a>
 		</div>
 	</div>
-	<img src="/picture/Accueil.svg">
+	<img src="/picture/Accueil.png">
 </article>
 <article class="main-form">
 	<h2>Chaque problème, sa solution :</h3>
