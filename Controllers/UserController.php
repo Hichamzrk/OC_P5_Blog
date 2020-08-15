@@ -6,9 +6,14 @@
 
 	class UserController extends Controller
 	{
-		//methode de la page login
-		public function login(){
-			
+		/**
+		 * Login
+		 */
+		public function index(){
+			if (isset($_SESSION['user'])) {
+				header('location: /admin');
+			}
+
 			//On affiche la view login
 			$this->render('login/index');
 			
@@ -17,7 +22,7 @@
 			$userManager = new UserManager;
 
 			//On vérifie si les champs ont été remplie
-			if (isset($_POST['email']) AND !empty($_POST['email'])) {
+			if (!empty($_POST) AND !in_array('',$_POST)) {
 				
 				$email = strip_tags($_POST['email']);
 				$password = $_POST['password'];
@@ -28,17 +33,18 @@
 				//On vérifie si l'utilisateur éxiste
 				if(!$userFind){
 				    http_response_code(404);
-				    echo "pas ok";
+				    echo "<script>alert('Identifiant erroné');</script>";
 					exit;
 				}
 				
 				//On hydrate les données dans la classe user
-				//$user->hydrate($userFind);
+				$user->hydrate($userFind);
 
 				//On vérifie si le password correspond et on créer la session
 				if(password_verify($password, $userFind->u_password)){
+					
+					$userManager->setSession($user);
 				
-					$_SESSION['email'] = $email;
 					header('location: /admin');
 				}
 			}
@@ -46,9 +52,11 @@
 		}
 
 		
-		//methode de logout
+		/**
+		 * Logout
+		 */
 		public function logout(){
-			unset($_SESSION['email']);
+			unset($_SESSION['user']);
 		    header('Location: '. $_SERVER['HTTP_REFERER']);
 		    exit;
 		}

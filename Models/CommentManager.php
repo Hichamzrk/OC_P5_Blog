@@ -24,4 +24,14 @@
 				]);
 	    	$this->create($comments);
 	    }
+
+	    public function filter(){
+	   		$filter = array(
+	   			'c_pseudo' => FILTER_SANITIZE_STRING,
+	   			'p_id' => FILTER_VALIDATE_INT,
+	   			'c_content' => FILTER_SANITIZE_FULL_SPECIAL_CHARS
+	   		);
+
+	   		return $filter; 
+	    }
 	}

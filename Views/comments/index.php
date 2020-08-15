@@ -1,7 +1,8 @@
 <div class="admin-header">
 	<h1>Administration</h1>
-	<h2>Articles</h2>
+	<h2>Commentaires</h2>
 </div>
+
 <div class="admin-menu">
 	<img src="/picture/icons/menu.png">
 </div>
@@ -18,20 +19,17 @@
 </div>
 
 <article class="admin-posts">
-	<?php foreach ($posts as $post):?>
+	<?php foreach ($comments as $comment):?>
 		<div class="admin-post">
 			<div class="text">
-				<h2><?=$post->p_title?></h3>
+				<h2><?=$comment->c_pseudo?> :  &nbsp<em><?=$comment->c_content?></em></h2>
 			</div>
 			<div class="update">
-				<a href="/admin/update/<?=$post->p_id?>">Update</a>
+				<a href="/admin/updateComment/<?=$comment->c_id?>/<?=App\Models\TokenManager::genToken()?>">valider</a>
 			</div>
-			
 			<div class="delete">
-					<a href="/admin/delete/<?=$post->p_id?>/<?=App\Models\TokenManager::genToken()?>" onclick="return confirm('Tu es sur ?')">Delete</a>
+				<a href="/admin/deleteComment/<?=$comment->c_id?>/<?=App\Models\TokenManager::genToken()?>" onclick="return confirm('Tu es sur ?')">delete</a>
 			</div>
 		</div>
 	<?php endforeach ?>
 </article>
-
-

@@ -7,7 +7,9 @@
 
 	class PostsController extends Controller
 	{
-		//methode de la page d'accueil index
+		/**
+		 * Affiche les articles
+		 */
 		public function index()
 		{
 			$post = new PostManager;
@@ -16,25 +18,32 @@
 			$this->render('posts/index', compact('posts'));
 		}
 
-		public function post($id){
+		/**
+		 * Affiche un article
+		 * @param  [Paramètre]
+		 */
+		public function post($parameter){
+			$id = strip_tags($parameter[0]);
+			
 			$posts = new PostManager;
-			$post = $posts->find($id[0], 'p_id');
+			$post = $posts->find($id, 'p_id');
 
-			$comment = new CommentManager;
-			$comments = $comment->findBy([
-				'p_id' => $id[0],
+			$commentManager = new CommentManager;
+			$comments = $commentManager->findBy([
+				'p_id' => $id,
 				'c_validation' => 1
 			]);
 
-			if (isset($_POST['c_content']) AND !empty($_POST['c_content'])) {
+			//Créer un commentaire
+			if (!empty($_POST) AND !in_array('',$_POST)) {
 				$comment = new Comment;
 
-				$comment->hydrate($_POST);
+				$filter = $commentManager->filter();
+				$donnee = filter_input_array(INPUT_POST, $filter);
+
+				$comment->hydrate($donnee);
 				
-				$commentManager = new CommentManager;
 				$commentManager->createComment($comment);
-				
-				//header("Refresh:0");
 			}
 
 			$this->render('post/index', compact('post','comments'));
