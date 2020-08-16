@@ -30,5 +30,6 @@ Les étapes pour installer votre programme :
 ### Démarrage
 
 - Lancer votre serveur local.
+- Pointer le serveur local sur le dossier public
 - Espace d'administration : -Email : Exemple@test.com ; -Mot de passe : 1234
 - Enjoy 
