@@ -14,7 +14,7 @@
 		public static function checkToken($proprety){
 			if ($_SESSION['token'] != $proprety) {
 				http_response_code(404);
-			    echo "La page recherché n'éxiste pas";
+			    echo "La page recherchée n'existe pas";
 			    unset($_SESSION['token']);
 			    die();
 			}
