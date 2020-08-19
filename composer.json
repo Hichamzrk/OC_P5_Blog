@@ -1,0 +1,10 @@
+{
+    "name": "hicham.z/blog",
+    "description": "projet 5 openclassrooms",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "App\\": "./"
+        }
+    }
+}
