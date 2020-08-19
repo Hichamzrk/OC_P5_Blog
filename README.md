@@ -6,6 +6,7 @@
 - Articles.
 - Espace d'administration.
 - Formulaire de contact.
+- Merci à Benoit Gambier pour les ressources très instructive : https://www.youtube.com/channel/UCVPd3h_V_hGjMZ8jNMt939Q
 
 ## Pour commencer
 
@@ -32,11 +33,11 @@ Les étapes pour installer votre programme :
 - Ouvrir la database "blog".
 - Aller au niveau de la table b_user.
 - Modifier les champs u_email et u_password.
-- Bien hasher le mot de passe avant d'enregistrer ici : http://www.passwordtool.hu/php5-password-hash-generator .
+- Bien hasher le mot de passe avant d'enregistrer, ici : http://www.passwordtool.hu/php5-password-hash-generator .
 
 ### Paramétrage du formulaire de contact
 
-Changer les differents information /Controller/MainController
+Changer les differentes informations : /Controller/MainController
 
 - ligne 23 : Votre email
 - ligne 24 : Le sujet
@@ -46,6 +47,6 @@ Changer les differents information /Controller/MainController
 ### Démarrage
 
 - Lancer votre serveur local.
-- Pointer le serveur local sur le dossier public
-- Espace d'administration : -Email : Exemple@test.com ; -Mot de passe : 1234
+- Pointer le serveur local sur le dossier public : /Public
+- Espace d'administration : (par defaut) -Email : Exemple@test.com ; -Mot de passe : 1234
 - Enjoy 
