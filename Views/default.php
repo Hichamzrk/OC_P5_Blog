@@ -29,7 +29,7 @@
 			<a href="https://github.com/Hichamzrk"><img src="/picture/icons/github.svg"></a>
 			<a href="https://www.linkedin.com/in/hichamzarrouk/"><img src="/picture/icons/linkedin.svg"></a>
 			<a href="https://twitter.com/HichamZrk"><img src="/picture/icons/twitter.svg"></a>	
-			<a href=""><img src="/picture/icons/cv.png"></a>
+			<a href="/picture/CV.pdf"><img src="/picture/icons/cv.png"></a>
 		</div>
 		<p>Copyright ©</p>
 	</footer>
