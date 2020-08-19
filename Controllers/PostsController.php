@@ -28,6 +28,12 @@
 			$posts = new PostManager;
 			$post = $posts->find($id, 'p_id');
 
+			if (empty($post)) {
+				  http_response_code(404);
+			      echo "La page recherchée n'existe pas";
+			      die();
+			}
+
 			$commentManager = new CommentManager;
 			$comments = $commentManager->findBy([
 				'p_id' => $id,
