@@ -52,7 +52,7 @@
 			$liste_champs = implode('AND ', $champs);
 
 			//On exécute la requête
-			return $this->requete("SELECT * FROM {$this->table} WHERE $liste_champs ORDER BY c_id DESC" , $valeurs)->fetchAll();
+			return $this->requete("SELECT * FROM {$this->table} WHERE $liste_champs ORDER BY p_id DESC" , $valeurs)->fetchAll();
 		}
 
 		//Methode de recherche d'un élement

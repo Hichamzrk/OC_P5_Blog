@@ -28,7 +28,7 @@
 					'p_chapo' => $post->getP_chapo(),
 					'p_content' => $post->getP_content(),
 				]);
-	    	$this->update($id,$posts, 'p_id');
+	    	$this->update($id, $posts, 'p_id');
 	    }
 
 	    public function findLast(){

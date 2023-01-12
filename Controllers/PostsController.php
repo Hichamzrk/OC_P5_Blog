@@ -1,57 +1,58 @@
-<?php  
-	namespace App\Controllers;
-	
-	Use App\Models\PostManager;
-	Use App\Models\CommentManager;
-	Use App\Models\Comment;
+<?php
+    namespace App\Controllers;
 
-	class PostsController extends Controller
-	{
-		/**
-		 * Affiche les articles
-		 */
-		public function index()
-		{
-			$post = new PostManager;
-			$posts = $post->findAll();
+    use App\Models\PostManager;
+    use App\Models\CommentManager;
+    use App\Models\Comment;
 
-			$this->render('posts/index', compact('posts'));
-		}
+    class PostsController extends AbstractController
+    {
+        /**
+         * Affiche les articles
+         */
+        public function index()
+        {
+            $post = new PostManager;
+            $posts = $post->findAll();
 
-		/**
-		 * Affiche un article
-		 * @param  [Paramètre]
-		 */
-		public function post($parameter){
-			$id = strip_tags($parameter[0]);
-			
-			$posts = new PostManager;
-			$post = $posts->find($id, 'p_id');
+            $this->render('posts/index', compact('posts'));
+        }
 
-			if (empty($post)) {
-				  http_response_code(404);
-			      echo "La page recherchée n'existe pas";
-			      die();
-			}
+        /**
+         * Affiche un article
+         * @param  [Paramètre]
+         */
+        public function post($parameter)
+        {
+            $id = strip_tags($parameter[3]);
+            
+            $posts = new PostManager;
+            $post = $posts->find($id, 'p_id');
 
-			$commentManager = new CommentManager;
-			$comments = $commentManager->findBy([
-				'p_id' => $id,
-				'c_validation' => 1
-			]);
+            if (empty($post)) {
+                http_response_code(404);
+                echo "La page recherchée n'existe pas";
+                die();
+            }
 
-			//Créer un commentaire
-			if (!empty($_POST) AND !in_array('',$_POST)) {
-				$comment = new Comment;
+            $commentManager = new CommentManager;
+            $comments = $commentManager->findBy([
+                'p_id' => $id,
+                'c_validation' => 1
+            ]);
 
-				$filter = $commentManager->filter();
-				$donnee = filter_input_array(INPUT_POST, $filter);
+            //Créer un commentaire
+            if (!empty($_POST) and !in_array('', $_POST)) {
+                $comment = new Comment;
 
-				$comment->hydrate($donnee);
-				
-				$commentManager->createComment($comment);
-			}
+                $filter = $commentManager->filter();
+                $donnee = filter_input_array(INPUT_POST, $filter);
 
-			$this->render('post/index', compact('post','comments'));
-		}
-	}
+                $comment->hydrate($donnee);
+                
+                $commentManager->createComment($comment);
+            }
+
+            $this->render('post/index', compact('post', 'comments'));
+        }
+    }

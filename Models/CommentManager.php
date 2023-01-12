@@ -11,9 +11,9 @@
 
 	    public function updateComment($id, Comment $comment){
 	    	$comments = ([
-					'c_validation'=> $comment->getC_validation(),
+					'c_validation' => $comment->getC_validation(),
 				]);
-	    	$this->update($id,$comments, 'c_id');
+	    	$this->update($id, $comments, 'c_id');
 	    }
 
 	    public function createComment(Comment $comment){
