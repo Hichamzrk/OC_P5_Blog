@@ -14,7 +14,7 @@
 		//Information de connexion
 		private const DBHOST = 'localhost';
 		private const DBUSER = 'root';
-		private const DBPASS = 'root';
+		private const DBPASS = '';
 		private const DBNAME = 'Blog';
 
 		//connexion à la bdd

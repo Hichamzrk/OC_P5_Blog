@@ -5,7 +5,7 @@
 
 	use App\Controllers;
 
-	class Main
+	class Router
 	{
 		public function start()
 		{
@@ -27,29 +27,30 @@
 			}
 			
 			// On sépare les paramètres et on les met dans le tableau $params
-			$params = explode('/', $_GET['p']);
-
+			$params = explode('/', $uri);
+			
 			// Si au moins 1 paramètre existe
-			if($params[0] != ""){
+			if($params[1] != ""){
 			    // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule, en ajoutant le namespace des controleurs et en ajoutant "Controller" à la fin
-			    $controller = '\\App\\Controllers\\'.ucfirst(array_shift($params)).'Controller';
+				$controller = '\\App\\Controllers\\'.ucfirst($params[1]).'Controller';
 			    if (!class_exists($controller)) {
-			    	http_response_code(404);
+					http_response_code(404);
 			        echo "La page recherchée n'existe pas";
 			        exit();
 			    }
 			    // On sauvegarde le 2ème paramètre dans $action si il existe, sinon index
-			    $action = isset($params[0]) ? array_shift($params) : 'index';
-
+			    $action = isset($params[2]) ? $params[2] : 'index';
+				
 			    // On instancie le contrôleur
 			    $controller = new $controller();
-
+				
 			    if(method_exists($controller, $action)){
-			        // Si il reste des paramètres, on appelle la méthode en envoyant les paramètres sinon on l'appelle "à vide"
-			        (isset($params[0])) ? $controller->$action($params) : $controller->$action();    
+					// Si il reste des paramètres, on appelle la méthode en envoyant les paramètres sinon on l'appelle "à vide"
+			        (isset($params[3])) ? $controller->$action($params) : $controller->$action();    
 			    }
 			    else{
-			        // On envoie le code réponse 404
+					// On envoie le code réponse 404
+					var_dump($controller);
 			        http_response_code(404);
 			        echo "La page recherchée n'existe pas";
 			    }

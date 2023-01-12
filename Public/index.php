@@ -7,14 +7,13 @@
 	define('ROOT', dirname(__DIR__));
 
 	//On importe les namespace nécessaires
-	use App\Autoloader;
-	use App\Core\Main;
+	use App\Core\Router;
 
 	//On importe l'autoloader
 	require ROOT . '/vendor/autoload.php';
 
 	//On instancie la router Main
-	$app = new Main();
+	$app = new Router();
 
 	//On démarre l'application depuis le router Main
 	$app->start();

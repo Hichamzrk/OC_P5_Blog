@@ -26,17 +26,9 @@ Ce qu'il est requis pour commencer avec votre projet :
 
 Les étapes pour installer votre programme :
 
-- Démarrer votre serveur local.
-- Upload du fichier sql qui est à la racine du projet sur votre interface de géstion de base de donnée fournie avec votre serveur local (phpmyadmin...).
-- Changement des informations de connexion à la base de donnée : /Core/Db/Db.php -> ligne 15. 
-
-### Obtenir un compte admin
-
-- Se connecter au SGBD corréspondant à votre serveur local.
-- Ouvrir la database "blog".
-- Aller au niveau de la table b_user.
-- Modifier les champs u_email et u_password.
-- Bien hasher le mot de passe avant d'enregistrer, ici : http://www.passwordtool.hu/php5-password-hash-generator .
+- Démarrer votre serveur local : `php -S 127.0.0.1:8000 -t ./Public/`
+- Import du fichier sql : `mysqldump -u username -p database_name > data-dump.sql`
+- Variable d'environnement de connexion à la base de donnée : /Core/Db/Db.php -> ligne 15. 
 
 ### Paramétrage du formulaire de contact
 
@@ -52,4 +44,4 @@ Changer les differentes informations : /Controller/MainController
 - Lancer votre serveur local.
 - Pointer le serveur local sur le dossier public : /Public
 - Espace d'administration : (par defaut) -Email : Exemple@test.com ; -Mot de passe : 1234
-- Enjoy 
+- Enjoy 🎉
