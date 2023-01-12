@@ -1,8 +1,6 @@
 ![Screenshot](Branding.png)
 ## Presentation du projet
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f0c0b6e5d4f1456fa2c2afb7483aad9b)](https://app.codacy.com/manual/Hichamzrk/OC_P5_Blog?utm_source=github.com&utm_medium=referral&utm_content=Hichamzrk/OC_P5_Blog&utm_campaign=Badge_Grade_Dashboard)
-
 - Blog en php orienté objet.
 - Utilisation du modele MVC.
 - Page d'accueil.
